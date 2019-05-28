@@ -6,7 +6,6 @@ LAYER_NAME='graphicsmagick'
 REGIONS='
 ap-northeast-1
 ap-northeast-2
-ap-east-1
 ap-south-1
 ap-southeast-1
 ap-southeast-2
