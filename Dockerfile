@@ -14,4 +14,4 @@ RUN curl https://versaweb.dl.sourceforge.net/project/graphicsmagick/graphicsmagi
 
 RUN cd /opt && \
   find . ! -perm -o=r -exec chmod +400 {} \; && \
-  zip -yr /tmp/gm-${GIT_VERSION}.zip ./*
+  zip -yr /tmp/gm-${GM_VERSION}.zip ./*
