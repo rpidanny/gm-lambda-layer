@@ -7,3 +7,9 @@ docker run -i --rm \
   -v "$PWD"/../layer:/opt \
   lambci/lambda:nodejs10.x \
   index.handler
+
+docker run -i --rm \
+  -v "$PWD":/var/task \
+  -v "$PWD"/../layer:/opt \
+  lambci/lambda:python3.7 \
+  main.handler
