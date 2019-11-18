@@ -2,9 +2,10 @@ FROM lambci/lambda-base:build
 
 RUN yum update -y
 
-RUN yum install -y libpng-devel libjpeg-devel libtiff-devel libuuid-devel gcc
+RUN yum install -y libpng-devel libjpeg-devel libtiff-devel libuuid-devel gcc gzip
 
 ARG GM_VERSION
+ARG GS_VERSION
 
 RUN curl https://versaweb.dl.sourceforge.net/project/graphicsmagick/graphicsmagick/${GM_VERSION}/GraphicsMagick-${GM_VERSION}.tar.xz | tar -xJ && \
   cd GraphicsMagick-${GM_VERSION} && \
@@ -33,6 +34,14 @@ RUN cp /usr/lib64/liblcms2.so* /opt/lib && \
 RUN mkdir -p /opt/share/fonts/default && \
   cp -R /usr/share/fonts/default/Type1 /opt/share/fonts/default/Type1
 
+RUN curl -L https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs${GS_VERSION//./}/ghostscript-${GS_VERSION}.tar.gz | tar -xvz
+RUN cd ghostscript-${GS_VERSION} && ./configure && make
+RUN cd ghostscript-${GS_VERSION} && make install
+RUN cp /usr/local/bin/gs /opt/bin/
+RUN gs --version
+
 RUN cd /opt && \
   find . ! -perm -o=r -exec chmod +400 {} \; && \
   zip -yr /tmp/gm-${GM_VERSION}.zip ./*
+
+
