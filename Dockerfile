@@ -5,8 +5,9 @@ RUN yum update -y
 RUN yum install -y libpng-devel libjpeg-devel libtiff-devel libuuid-devel gcc
 
 ARG GM_VERSION
+ARG GM_MINOR_VERSION
 
-RUN curl https://versaweb.dl.sourceforge.net/project/graphicsmagick/graphicsmagick/${GM_VERSION}/GraphicsMagick-${GM_VERSION}.tar.xz | tar -xJ && \
+RUN curl "ftp://ftp.graphicsmagick.org/pub/GraphicsMagick/$GM_MINOR_VERSION/GraphicsMagick-$GM_VERSION.tar.xz" | tar -xJ && \
   cd GraphicsMagick-${GM_VERSION} && \
   ./configure --prefix=/opt --enable-shared=no --enable-static=yes --with-gs-font-dir=/opt/share/fonts/default/Type1 && \
   make && \
