@@ -1,7 +1,7 @@
 #!/bin/bash
 
-GM_VERSION=1.3.31
-LAYER_NAME='graphicsmagick'
+GM_VERSION=1.3.35
+LAYER_NAME='graphicsmagick-amzn'
 
 REGIONS='
 ap-northeast-1
@@ -28,5 +28,5 @@ for region in $REGIONS; do
   aws lambda add-layer-version-permission --region $region --layer-name $LAYER_NAME \
     --statement-id sid1 --action lambda:GetLayerVersion --principal '*' \
     --version-number $(aws lambda publish-layer-version --region $region --layer-name $LAYER_NAME --zip-file fileb://layer.zip \
-      --description "GraphicsMagick ${GM_VERSION} binaries" --query Version --output text --profile $PROFILE) --profile $PROFILE
+      --description "GraphicsMagick ${GM_VERSION} binaries for AmazonLinux" --query Version --output text --profile $PROFILE) --profile $PROFILE
 done

@@ -1,12 +1,34 @@
-FROM lambci/lambda-base:build
+FROM amazonlinux:1
 
 RUN yum update -y
 
-RUN yum install -y libpng-devel libjpeg-devel libtiff-devel libuuid-devel gcc
+RUN yum install -y \
+  make \
+  gcc \
+  zip \
+  tar \
+  gzip \
+  file \
+  lcms2 \
+  libSM \
+  libXext \
+  freetype \
+  findutils \
+  bzip2-devel \
+  libpng-devel \
+  libjpeg-devel \
+  libtiff-devel \
+  libuuid-devel \
+  freetype-devel \
+  liblcms2-devel
+
+RUN curl -O http://mirror.centos.org/altarch/7/os/aarch64/Packages/urw-fonts-2.4-16.el7.noarch.rpm && \
+  rpm -ivh --nodeps urw-fonts-2.4-16.el7.noarch.rpm
 
 ARG GM_VERSION
 
-RUN curl https://versaweb.dl.sourceforge.net/project/graphicsmagick/graphicsmagick/${GM_VERSION}/GraphicsMagick-${GM_VERSION}.tar.xz | tar -xJ && \
+RUN curl -O -L https://versaweb.dl.sourceforge.net/project/graphicsmagick/graphicsmagick/${GM_VERSION}/GraphicsMagick-${GM_VERSION}.tar.gz && \
+  tar -xvf GraphicsMagick-${GM_VERSION}.tar.gz && \
   cd GraphicsMagick-${GM_VERSION} && \
   ./configure --prefix=/opt --enable-shared=no --enable-static=yes --with-gs-font-dir=/opt/share/fonts/default/Type1 && \
   make && \
@@ -27,7 +49,7 @@ RUN cp /usr/lib64/liblcms2.so* /opt/lib && \
   cp /usr/lib64/libjbig.so* /opt/lib && \
   cp /usr/lib64/libxcb.so* /opt/lib && \
   cp /usr/lib64/libXau.so* /opt/lib && \
-  cp /usr/lib64/libuuid.so /opt/lib/libuuid.so.1 && \  
+  cp /usr/lib64/libuuid.so /opt/lib/libuuid.so.1 && \
   cp /usr/lib64/libbz2.so /opt/lib/libbz2.so.1
 
 RUN mkdir -p /opt/share/fonts/default && \
