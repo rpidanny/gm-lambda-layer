@@ -1,6 +1,6 @@
 #!/bin/bash
 
-GM_VERSION=1.3.31
+GM_VERSION=1.3.38
 LAYER_NAME='graphicsmagick'
 
 REGIONS='

@@ -10,13 +10,13 @@ Click on Layers and choose `Add a layer`, and `Provide a layer version ARN` and 
 arn:aws:lambda:eu-west-1:175033217214:layer:graphicsmagick:2
 ```
 
-![Provide layer ARN](img/usage.png "Provide layer ARN screenshot")
+![Provide layer ARN](img/usage.png 'Provide layer ARN screenshot')
 
 ## Version ARNs
 
-| GraphicsMagick version | ARN |
-| --- | --- |
-| 1.3.31 | `arn:aws:lambda:<region>:175033217214:layer:graphicsmagick:2` |
+| GraphicsMagick version | ARN                                                           |
+| ---------------------- | ------------------------------------------------------------- |
+| 1.3.38                 | `arn:aws:lambda:<region>:175033217214:layer:graphicsmagick:2` |
 
 ## Available Regions
 
